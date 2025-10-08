@@ -7,9 +7,12 @@ class MobileHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.amber,
+        color: const Color.fromARGB(255, 195, 186, 158),
         child: Center(
-          child: Column(children: [BackButton(), Text('homescreen Mobile')]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [BackButton(), Text('homescreen Mobile')],
+          ),
         ),
       ),
     );

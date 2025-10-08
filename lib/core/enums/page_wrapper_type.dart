@@ -1,0 +1,1 @@
+enum PageWrapperType { page, service }

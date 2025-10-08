@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:multi_platform_media_player/core/helpers/responsive_widget_helper.dart';
-import 'package:multi_platform_media_player/presentation/widgets/screens/home_screen/desktop_home_screen.dart';
-import 'package:multi_platform_media_player/presentation/widgets/screens/home_screen/mobile_home_screen.dart';
-import 'package:multi_platform_media_player/presentation/widgets/screens/home_screen/tablet_home_screen.dart';
+import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/desktop_item_view.dart';
+import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/mobile_item_view.dart';
+import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/tablet_item_view.dart';
 
 class TabletLandingPage extends StatelessWidget {
   const TabletLandingPage({super.key});
