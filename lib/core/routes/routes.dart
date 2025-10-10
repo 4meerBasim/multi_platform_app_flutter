@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_platform_media_player/core/routes/route_config.dart';
+import 'package:multi_platform_media_player/presentation/widgets/appbar/responsive_appbar.dart';
 import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/responsive_item_view_page.dart';
 import 'package:multi_platform_media_player/presentation/widgets/screens/landing_page/responsive_landing_page.dart';
 import 'package:multi_platform_media_player/presentation/widgets/screens/page_wrapper.dart';
@@ -19,6 +20,7 @@ GoRouter createRouter() {
           return CustomTransitionPage(
             key: state.pageKey,
             child: PageWrapper(
+              appbar: ResponsiveAppbar(),
               childWidget:
                   ResponsiveLandingPage(), // 👈 REMOVE SliverToBoxAdapter
             ),
@@ -35,7 +37,10 @@ GoRouter createRouter() {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: PageWrapper(childWidget: ResponsiveItemPage()),
+            child: PageWrapper(
+              appbar: ResponsiveAppbar(),
+              childWidget: ResponsiveItemPage(),
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
                   return FadeTransition(opacity: animation, child: child);

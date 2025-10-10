@@ -214,13 +214,16 @@ class MobileLandingPage extends StatelessWidget {
                   ClipRRect(
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(16),
+                      bottom: Radius.circular(16),
                     ),
                     child: Image.asset(item['image']!, fit: BoxFit.cover),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      bottom: 2,
+                      left: 8,
+                      right: 6,
                     ),
                     child: Text(
                       item['title']!,
@@ -233,10 +236,13 @@ class MobileLandingPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
+                    padding: const EdgeInsets.only(
+                      top: 0,
+                      bottom: 10,
+                      left: 8,
+                      right: 6,
                     ),
+
                     child: Text(
                       item['description']!,
                       maxLines: 1,

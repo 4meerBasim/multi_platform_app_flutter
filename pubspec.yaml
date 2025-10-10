@@ -24,4 +24,5 @@ dev_dependencies:
 flutter:
   assets:
     - assets/ 
+    - assets/mose.png
   uses-material-design: true

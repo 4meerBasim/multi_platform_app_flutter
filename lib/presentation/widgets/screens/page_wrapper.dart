@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:multi_platform_media_player/presentation/widgets/appbar/mobile_appbar.dart';
 
 class PageWrapper extends StatefulWidget {
   final Widget childWidget;
-  const PageWrapper({super.key, required this.childWidget});
+  final Widget appbar;
+  const PageWrapper({
+    super.key,
+    required this.childWidget,
+    required this.appbar,
+  });
 
   @override
   State<PageWrapper> createState() => _PageWrapperState();
@@ -14,18 +20,7 @@ class _PageWrapperState extends State<PageWrapper> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 300, // set a nice expanded height
-            pinned: true, // keeps title visible when scrolling
-            backgroundColor: Colors.lightBlueAccent,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                'assets/download (6).jpeg',
-                fit: BoxFit.cover,
-              ),
-              title: Text('test'),
-            ),
-          ),
+          widget.appbar,
           SliverToBoxAdapter(child: widget.childWidget),
         ],
       ),
