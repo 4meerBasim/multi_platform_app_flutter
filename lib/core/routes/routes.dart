@@ -18,7 +18,10 @@ GoRouter createRouter() {
         pageBuilder: (context, state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: PageWrapper(childWidget: ResponsiveLandingPage()),
+            child: PageWrapper(
+              childWidget:
+                  ResponsiveLandingPage(), // 👈 REMOVE SliverToBoxAdapter
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
                   return FadeTransition(opacity: animation, child: child);

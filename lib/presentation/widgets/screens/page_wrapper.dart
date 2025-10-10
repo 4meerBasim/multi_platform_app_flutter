@@ -12,8 +12,23 @@ class _PageWrapperState extends State<PageWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Gallery')),
-      body: widget.childWidget,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 300, // set a nice expanded height
+            pinned: true, // keeps title visible when scrolling
+            backgroundColor: Colors.lightBlueAccent,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset(
+                'assets/download (6).jpeg',
+                fit: BoxFit.cover,
+              ),
+              title: Text('test'),
+            ),
+          ),
+          SliverToBoxAdapter(child: widget.childWidget),
+        ],
+      ),
     );
   }
 }
