@@ -21,6 +21,7 @@ class _PageWrapperState extends State<PageWrapper> {
       body: CustomScrollView(
         slivers: [
           widget.appbar,
+          widget.appbar,
           SliverToBoxAdapter(child: widget.childWidget),
         ],
       ),
