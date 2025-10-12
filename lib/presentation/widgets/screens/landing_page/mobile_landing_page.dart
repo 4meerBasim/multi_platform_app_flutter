@@ -180,7 +180,7 @@ class MobileLandingPage extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: MasonryGridView.count(
         // 👇 let parent Sliver handle scrolling
         physics: const NeverScrollableScrollPhysics(),
@@ -198,7 +198,7 @@ class MobileLandingPage extends StatelessWidget {
             onTap: () => context.push('/details'),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color.fromARGB(255, 61, 61, 61),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: const [
                   BoxShadow(

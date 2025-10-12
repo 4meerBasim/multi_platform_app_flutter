@@ -4,10 +4,12 @@ import 'package:multi_platform_media_player/presentation/widgets/appbar/mobile_a
 class PageWrapper extends StatefulWidget {
   final Widget childWidget;
   final Widget appbar;
+  final Widget filters;
   const PageWrapper({
     super.key,
     required this.childWidget,
     required this.appbar,
+    required this.filters,
   });
 
   @override
@@ -18,11 +20,37 @@ class _PageWrapperState extends State<PageWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          widget.appbar,
-          widget.appbar,
-          SliverToBoxAdapter(child: widget.childWidget),
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.center,
+                  radius: 0.8,
+                  colors: [
+                    Color(0xFF1A0033), // deep purple in center
+                    Colors.black, // black at edges
+                  ],
+                  stops: [0.0, 1.0],
+                ),
+              ),
+            ),
+          ),
+          // Positioned.fill(
+          //   child: Image.asset(
+          //     'assets/backgroundstars.gif', // your image path
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          CustomScrollView(
+            slivers: [
+              widget.appbar,
+              widget.filters,
+              SliverToBoxAdapter(child: widget.childWidget),
+            ],
+          ),
         ],
       ),
     );

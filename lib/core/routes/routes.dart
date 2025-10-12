@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multi_platform_media_player/core/routes/route_config.dart';
+import 'package:multi_platform_media_player/presentation/widgets/appbar/filters/responsive_filters.dart';
 import 'package:multi_platform_media_player/presentation/widgets/appbar/responsive_appbar.dart';
 import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/responsive_item_view_page.dart';
 import 'package:multi_platform_media_player/presentation/widgets/screens/landing_page/responsive_landing_page.dart';
@@ -21,6 +22,7 @@ GoRouter createRouter() {
             key: state.pageKey,
             child: PageWrapper(
               appbar: ResponsiveAppbar(),
+              filters: ResponsiveFilters(),
               childWidget:
                   ResponsiveLandingPage(), // 👈 REMOVE SliverToBoxAdapter
             ),
@@ -38,6 +40,8 @@ GoRouter createRouter() {
           return CustomTransitionPage(
             key: state.pageKey,
             child: PageWrapper(
+              filters: ResponsiveFilters(),
+
               appbar: ResponsiveAppbar(),
               childWidget: ResponsiveItemPage(),
             ),

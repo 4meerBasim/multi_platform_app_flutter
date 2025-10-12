@@ -6,13 +6,13 @@ class MobileAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 200, // set a nice expanded height
+      expandedHeight: 300, // set a nice expanded height
       pinned: true, // keeps title visible when scrolling
       backgroundColor: const Color.fromARGB(255, 15, 5, 59),
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: EdgeInsets.zero,
         background: ClipRRect(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(25)),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(45)),
           child: Image.asset('assets/appbara.gif', fit: BoxFit.cover),
         ),
         title: ClipRRect(
@@ -44,7 +44,7 @@ class MobileAppbar extends StatelessWidget {
               ),
             ),
           ),
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(12)),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(0)),
         ),
       ),
     );
