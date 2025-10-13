@@ -47,24 +47,45 @@ class _PageWrapperState extends State<PageWrapper> {
           //     fit: BoxFit.cover,
           //   ),
           // ),
-          CustomScrollView(
-            slivers: [
-              ?widget.appbar,
-              ?widget.filters,
-              SliverToBoxAdapter(child: widget.childWidget),
-              SliverPadding(
-                padding: screenWidth >= 1000
-                    ? EdgeInsets.only(right: screenWidth / 2)
-                    : EdgeInsets.zero,
-                sliver: SliverFooter(
-                  imagePath: 'assets/eye.gif',
-                  text: 'No more Arts',
-                  buttonText: 'testst',
-                  onPressed: () {},
+          if (screenWidth > 1000) ...[
+            CustomScrollView(
+              slivers: [
+                ?widget.appbar,
+                ?widget.filters,
+                SliverToBoxAdapter(child: widget.childWidget),
+                SliverPadding(
+                  padding: screenWidth >= 1000
+                      ? EdgeInsets.only(right: screenWidth / 2)
+                      : EdgeInsets.zero,
+                  sliver: SliverFooter(
+                    imagePath: 'assets/eye.gif',
+                    text: 'No more Arts',
+                    buttonText: 'testst',
+                    onPressed: () {},
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ] else ...[
+            CustomScrollView(
+              slivers: [
+                ?widget.appbar,
+                ?widget.filters,
+                SliverToBoxAdapter(child: widget.childWidget),
+                SliverPadding(
+                  padding: screenWidth >= 1000
+                      ? EdgeInsets.only(right: screenWidth / 2)
+                      : EdgeInsets.zero,
+                  sliver: SliverFooter(
+                    imagePath: 'assets/eye.gif',
+                    text: 'No more Arts',
+                    buttonText: 'testst',
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
+          ],
         ],
       ),
     );
