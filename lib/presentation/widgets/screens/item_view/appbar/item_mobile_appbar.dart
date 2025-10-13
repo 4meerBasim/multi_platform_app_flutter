@@ -3,13 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:liquid_glass/liquid_glass.dart';
 import 'package:multi_platform_media_player/presentation/widgets/appbar/testliquid.dart';
 
-class MobileAppbar extends StatelessWidget {
-  const MobileAppbar({super.key});
+class ItemMobileAppbar extends StatelessWidget {
+  const ItemMobileAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 300, // set a nice expanded height
+      expandedHeight: 400, // set a nice expanded height
       pinned: true, // keeps title visible when scrolling
       backgroundColor: const Color.fromARGB(255, 10, 1, 32),
       toolbarHeight: 70,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MobileFilters extends StatefulWidget {
   const MobileFilters({super.key});
@@ -28,7 +29,6 @@ class _MobileFiltersState extends State<MobileFilters> {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      toolbarHeight: 10, // <-- sets the actual visible height
 
       floating: true,
       automaticallyImplyLeading: false,
@@ -46,7 +46,7 @@ class _MobileFiltersState extends State<MobileFilters> {
                 final bool isSelected = index == selectedIndex;
 
                 return AnimatedContainer(
-                  duration: const Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 200),
                   margin: const EdgeInsets.only(right: 10),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -57,8 +57,8 @@ class _MobileFiltersState extends State<MobileFilters> {
                     gradient: LinearGradient(
                       colors: isSelected
                           ? const [
-                              Color.fromARGB(255, 98, 24, 182),
-                              Color.fromARGB(255, 93, 43, 233),
+                              Color.fromARGB(255, 39, 6, 129),
+                              Color.fromARGB(255, 11, 9, 94),
                             ]
                           : [Colors.transparent, Colors.transparent],
                       begin: Alignment.topLeft,
@@ -97,7 +97,7 @@ class _MobileFiltersState extends State<MobileFilters> {
                     borderRadius: BorderRadius.circular(10), // match container
                     child: AnimatedDefaultTextStyle(
                       duration: const Duration(milliseconds: 250),
-                      style: TextStyle(
+                      style: GoogleFonts.orbitron(
                         color: isSelected
                             ? Colors.white
                             : const Color.fromARGB(177, 255, 255, 255),

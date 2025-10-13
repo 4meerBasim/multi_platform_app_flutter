@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:multi_platform_media_player/presentation/widgets/appbar/mobile_appbar.dart';
+import 'package:multi_platform_media_player/presentation/widgets/screens/fotter.dart';
 
 class PageWrapper extends StatefulWidget {
   final Widget childWidget;
-  final Widget appbar;
-  final Widget filters;
+  final Widget? appbar;
+  final Widget? filters;
   const PageWrapper({
     super.key,
     required this.childWidget,
-    required this.appbar,
-    required this.filters,
+    this.appbar,
+    this.filters,
   });
 
   @override
@@ -19,6 +20,8 @@ class PageWrapper extends StatefulWidget {
 class _PageWrapperState extends State<PageWrapper> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
@@ -46,9 +49,20 @@ class _PageWrapperState extends State<PageWrapper> {
           // ),
           CustomScrollView(
             slivers: [
-              widget.appbar,
-              widget.filters,
+              ?widget.appbar,
+              ?widget.filters,
               SliverToBoxAdapter(child: widget.childWidget),
+              SliverPadding(
+                padding: screenWidth >= 1000
+                    ? EdgeInsets.only(right: screenWidth / 2)
+                    : EdgeInsets.zero,
+                sliver: SliverFooter(
+                  imagePath: 'assets/eye.gif',
+                  text: 'No more Arts',
+                  buttonText: 'testst',
+                  onPressed: () {},
+                ),
+              ),
             ],
           ),
         ],

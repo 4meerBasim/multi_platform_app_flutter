@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_platform_media_player/core/routes/route_config.dart';
+import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/mobile_item_view.dart';
+import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/responsive_item_view_page.dart';
 
 class MobileLandingPage extends StatelessWidget {
   const MobileLandingPage({super.key});
@@ -10,172 +13,132 @@ class MobileLandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = [
       {
-        'title': 'The Starry Night',
-        'description': 'Art that captures the rhythm and harmony of life.',
-        'image': 'assets/download (1).jpeg',
-      },
-      {
-        'title': 'Mona Lisa',
-        'description': 'Moving images that tell stories and capture moments.',
-        'image': 'assets/download (2).jpeg',
-      },
-      {
         'title': 'The Persistence of Memory',
         'description':
             'Audio works that convey thoughts, ideas, and narratives.',
-        'image': 'assets/download (3).jpeg',
+        'image': 'assets/1.jpg',
       },
       {
         'title': 'The Birth of Venus',
         'description': 'Selected works that inspire and resonate the most.',
-        'image': 'assets/download (4).jpeg',
+        'image': 'assets/2.png',
       },
       {
         'title': 'Girl with a Pearl Earring',
         'description': 'Visual and literary masterpieces preserving knowledge.',
-        'image': 'assets/download (5).jpeg',
+        'image': 'assets/3.jpg',
       },
       {
         'title': 'The Night Watch',
         'description': 'Frozen moments in time, capturing beauty and emotion.',
-        'image': 'assets/download (6).jpeg',
+        'image': 'assets/4.jpg',
       },
       {
         'title': 'The Scream',
         'description': 'Artistic worlds created for imagination and play.',
-        'image': 'assets/download (7).jpeg',
+        'image': 'assets/5.jpeg',
       },
       {
         'title': 'Guernica',
         'description':
             'Digital creations blending function with visual design.',
-        'image': 'assets/download.jpeg',
-      },
-      {
-        'title': 'The Starry Night',
-        'description': 'Art that captures the rhythm and harmony of life.',
-        'image': 'assets/download (1).jpeg',
-      },
-      {
-        'title': 'Mona Lisa',
-        'description': 'Moving images that tell stories and capture moments.',
-        'image': 'assets/download (2).jpeg',
+        'image': 'assets/6.jpg',
       },
       {
         'title': 'The Persistence of Memory',
         'description':
             'Audio works that convey thoughts, ideas, and narratives.',
-        'image': 'assets/download (3).jpeg',
+        'image': 'assets/1.jpg',
       },
       {
         'title': 'The Birth of Venus',
         'description': 'Selected works that inspire and resonate the most.',
-        'image': 'assets/download (4).jpeg',
+        'image': 'assets/2.png',
       },
       {
         'title': 'Girl with a Pearl Earring',
         'description': 'Visual and literary masterpieces preserving knowledge.',
-        'image': 'assets/download (5).jpeg',
+        'image': 'assets/3.jpg',
       },
       {
         'title': 'The Night Watch',
         'description': 'Frozen moments in time, capturing beauty and emotion.',
-        'image': 'assets/download (6).jpeg',
+        'image': 'assets/4.jpg',
       },
       {
         'title': 'The Scream',
         'description': 'Artistic worlds created for imagination and play.',
-        'image': 'assets/download (7).jpeg',
+        'image': 'assets/5.jpeg',
       },
       {
         'title': 'Guernica',
         'description':
             'Digital creations blending function with visual design.',
-        'image': 'assets/download.jpeg',
-      },
-      {
-        'title': 'The Starry Night',
-        'description': 'Art that captures the rhythm and harmony of life.',
-        'image': 'assets/download (1).jpeg',
-      },
-      {
-        'title': 'Mona Lisa',
-        'description': 'Moving images that tell stories and capture moments.',
-        'image': 'assets/download (2).jpeg',
+        'image': 'assets/6.jpg',
       },
       {
         'title': 'The Persistence of Memory',
         'description':
             'Audio works that convey thoughts, ideas, and narratives.',
-        'image': 'assets/download (3).jpeg',
+        'image': 'assets/1.jpg',
       },
       {
         'title': 'The Birth of Venus',
         'description': 'Selected works that inspire and resonate the most.',
-        'image': 'assets/download (4).jpeg',
+        'image': 'assets/2.png',
       },
       {
         'title': 'Girl with a Pearl Earring',
         'description': 'Visual and literary masterpieces preserving knowledge.',
-        'image': 'assets/download (5).jpeg',
+        'image': 'assets/3.jpg',
       },
       {
         'title': 'The Night Watch',
         'description': 'Frozen moments in time, capturing beauty and emotion.',
-        'image': 'assets/download (6).jpeg',
+        'image': 'assets/4.jpg',
       },
       {
         'title': 'The Scream',
         'description': 'Artistic worlds created for imagination and play.',
-        'image': 'assets/download (7).jpeg',
+        'image': 'assets/5.jpeg',
       },
       {
         'title': 'Guernica',
         'description':
             'Digital creations blending function with visual design.',
-        'image': 'assets/download.jpeg',
-      },
-      {
-        'title': 'The Starry Night',
-        'description': 'Art that captures the rhythm and harmony of life.',
-        'image': 'assets/download (1).jpeg',
-      },
-      {
-        'title': 'Mona Lisa',
-        'description': 'Moving images that tell stories and capture moments.',
-        'image': 'assets/download (2).jpeg',
+        'image': 'assets/6.jpg',
       },
       {
         'title': 'The Persistence of Memory',
         'description':
             'Audio works that convey thoughts, ideas, and narratives.',
-        'image': 'assets/download (3).jpeg',
+        'image': 'assets/1.jpg',
       },
       {
         'title': 'The Birth of Venus',
         'description': 'Selected works that inspire and resonate the most.',
-        'image': 'assets/download (4).jpeg',
+        'image': 'assets/2.png',
       },
       {
         'title': 'Girl with a Pearl Earring',
         'description': 'Visual and literary masterpieces preserving knowledge.',
-        'image': 'assets/download (5).jpeg',
+        'image': 'assets/3.jpg',
       },
       {
         'title': 'The Night Watch',
         'description': 'Frozen moments in time, capturing beauty and emotion.',
-        'image': 'assets/download (6).jpeg',
+        'image': 'assets/4.jpg',
       },
       {
         'title': 'The Scream',
         'description': 'Artistic worlds created for imagination and play.',
-        'image': 'assets/download (7).jpeg',
+        'image': 'assets/5.jpeg',
       },
       {
         'title': 'Guernica',
         'description':
             'Digital creations blending function with visual design.',
-        'image': 'assets/download.jpeg',
+        'image': 'assets/6.jpg',
       },
     ];
 
@@ -195,10 +158,22 @@ class MobileLandingPage extends StatelessWidget {
           final item = items[index];
           return InkWell(
             borderRadius: BorderRadius.circular(16),
-            onTap: () => context.push('/details'),
+            onTap: () {
+              final item = items[index];
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ResponsiveItemPage(
+                    imagePath: item['image']!,
+                    title: item['title']!,
+                    description: item['description']!,
+                  ),
+                ),
+              );
+            },
             child: Container(
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 61, 61, 61),
+                color: const Color.fromARGB(255, 29, 29, 29),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: const [
                   BoxShadow(
@@ -229,9 +204,10 @@ class MobileLandingPage extends StatelessWidget {
                       item['title']!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: GoogleFonts.orbitron(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -247,9 +223,10 @@ class MobileLandingPage extends StatelessWidget {
                       item['description']!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: GoogleFonts.orbitron(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
+                        color: Colors.white,
                       ),
                     ),
                   ),
