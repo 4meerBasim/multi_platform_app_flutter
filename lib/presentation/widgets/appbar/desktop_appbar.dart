@@ -11,7 +11,7 @@ class DesktopAppbar extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return SliverPadding(
-      padding: EdgeInsetsGeometry.only(right: screenWidth / 2),
+      padding: EdgeInsets.only(right: screenWidth / 2),
       sliver: SliverAppBar(
         expandedHeight: 200, // set a nice expanded height
         pinned: true, // keeps title visible when scrolling

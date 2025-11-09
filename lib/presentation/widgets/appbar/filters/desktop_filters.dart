@@ -30,7 +30,7 @@ class _DesktopFiltersState extends State<DesktopFilters> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return SliverPadding(
-      padding: EdgeInsetsGeometry.only(right: screenWidth / 2),
+      padding: EdgeInsets.only(right: screenWidth / 2),
       sliver: SliverAppBar(
         pinned: true,
 

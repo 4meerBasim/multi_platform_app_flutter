@@ -6,10 +6,18 @@ class AppRoutes {
     );
   }
 
+  static const onboarding = '/onboarding';
   static const responsiveLandingPage = '/responsive_landing_page';
   static const responsiveItemPage = '/responsive_item_page';
 
   static final routes = <PageConfig>[
+    PageConfig(
+      path: onboarding,
+      showAppBar: false,
+      showNavBar: false,
+      showBackground: false,
+      scrollable: false,
+    ),
     PageConfig(
       path: responsiveLandingPage,
       showAppBar: true,

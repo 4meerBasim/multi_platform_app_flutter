@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:multi_platform_media_player/core/routes/route_config.dart';
 import 'package:multi_platform_media_player/presentation/widgets/appbar/filters/responsive_filters.dart';
 import 'package:multi_platform_media_player/presentation/widgets/appbar/responsive_appbar.dart';
-import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/appbar/reponsive_item_appbar.dart';
 import 'package:multi_platform_media_player/presentation/widgets/screens/item_view/responsive_item_view_page.dart';
 import 'package:multi_platform_media_player/presentation/widgets/screens/landing_page/responsive_landing_page.dart';
+import 'package:multi_platform_media_player/presentation/widgets/screens/onboarding/onboarding_page.dart';
 import 'package:multi_platform_media_player/presentation/widgets/screens/page_wrapper.dart';
 
 final GlobalKey<NavigatorState> navigatorKey =
@@ -13,8 +13,22 @@ final GlobalKey<NavigatorState> navigatorKey =
 GoRouter createRouter() {
   return GoRouter(
     navigatorKey: navigatorKey,
-    initialLocation: AppRoutes.responsiveLandingPage,
+    initialLocation: AppRoutes.onboarding,
     routes: [
+      GoRoute(
+        name: 'onboarding',
+        path: AppRoutes.onboarding,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: OnboardingPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+          );
+        },
+      ),
       GoRoute(
         name: 'responsive_landing_page',
         path: AppRoutes.responsiveLandingPage,
@@ -29,8 +43,28 @@ GoRouter createRouter() {
             ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
-                  return FadeTransition(opacity: animation, child: child);
-                },
+              // Smooth slide and fade transition
+              const begin = Offset(1.0, 0.0);
+              const end = Offset.zero;
+              const curve = Curves.easeInOutCubic;
+
+              var tween = Tween(begin: begin, end: end)
+                  .chain(CurveTween(curve: curve));
+              var offsetAnimation = animation.drive(tween);
+
+              var fadeAnimation = CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeIn,
+              );
+
+              return SlideTransition(
+                position: offsetAnimation,
+                child: FadeTransition(
+                  opacity: fadeAnimation,
+                  child: child,
+                ),
+              );
+            },
           );
         },
       ),
