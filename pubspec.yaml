@@ -17,6 +17,9 @@ dependencies:
   flutter_staggered_grid_view: ^0.7.0
   liquid_glass: ^0.0.2
   google_fonts: ^6.3.2
+  flutter_svg: ^2.2.2
+  animated_splash_screen: ^1.3.0
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -26,5 +29,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/ 
-    - assets/mose.png
+    - assets/first.png
+    - Lottie/Welcome.json
+
   uses-material-design: true
