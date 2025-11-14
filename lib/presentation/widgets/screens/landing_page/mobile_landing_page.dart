@@ -205,7 +205,7 @@ class MobileLandingPage extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.orbitron(
-                        fontSize: 18,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
@@ -224,7 +224,7 @@ class MobileLandingPage extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.orbitron(
-                        fontSize: 14,
+                        fontSize: 9,
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
                       ),

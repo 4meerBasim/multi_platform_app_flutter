@@ -29,10 +29,11 @@ class _MobileFiltersState extends State<MobileFilters> {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-
       floating: true,
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
+      toolbarHeight: 5, // Set explicit height
+      expandedHeight: 0, // Set same as toolbarHeight for consistency
       flexibleSpace: Container(
         decoration: const BoxDecoration(),
         child: Stack(

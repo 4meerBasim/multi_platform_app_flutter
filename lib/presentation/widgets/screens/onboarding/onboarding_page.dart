@@ -20,7 +20,7 @@ class _OnboardingPageState extends State<OnboardingPage>
   late AnimationController _scaleController;
   late AnimationController _slideController;
   late AnimationController _exitController;
-  late AnimationController _gradientController;
+  late AnimationController _floatingCircleController;
 
   final List<OnboardingContent> _pages = [
     OnboardingContent(
@@ -29,10 +29,27 @@ class _OnboardingPageState extends State<OnboardingPage>
           'Explore a world of entertainment with our multi-platform media player',
       centerIcon: "assets/first.png",
       floatingIcons: [
-        Icons.movie,
-        Icons.music_note,
-        Icons.video_library,
-        Icons.headphones,
+        FloatingIconConfig(
+          icon: Icons.music_note,
+          top: 0.2,
+          right: 50,
+          size: 40,
+          padding: 16,
+        ),
+        FloatingIconConfig(
+          text: '4K',
+          bottom: 0.15,
+          left: 50,
+          size: 18,
+          padding: 12,
+        ),
+        FloatingIconConfig(
+          text: 'HD',
+          bottom: 0.25,
+          right: 45,
+          size: 16,
+          padding: 10,
+        ),
       ],
       backgroundColor: Color(0xFF0A0E27), // Deep space blue
       squareColor: Color(0xFF00F5FF), // Cyan neon
@@ -45,10 +62,21 @@ class _OnboardingPageState extends State<OnboardingPage>
           'Explore a world of entertainment with our multi-platform media player',
       centerIcon: "assets/second.gif",
       floatingIcons: [
-        Icons.phone_android,
-        Icons.tablet_mac,
-        Icons.laptop,
-        Icons.tv,
+        FloatingIconConfig(
+          icon: Icons.phone_android,
+          top: 0.18,
+          left: 35,
+          size: 35,
+          padding: 13,
+        ),
+
+        FloatingIconConfig(
+          icon: Icons.laptop,
+          bottom: 0.18,
+          left: 55,
+          size: 34,
+          padding: 13,
+        ),
       ],
       backgroundColor: Color(0xFF1A0033), // Deep purple
       squareColor: Color(0xFFFF0090), // Hot pink neon
@@ -61,10 +89,28 @@ class _OnboardingPageState extends State<OnboardingPage>
           'Explore a world of entertainment with our multi-platform media player',
       centerIcon: "assets/Pixel_Robot.gif",
       floatingIcons: [
-        Icons.sync,
-        Icons.download,
-        Icons.favorite,
-        Icons.playlist_play,
+        FloatingIconConfig(
+          icon: Icons.sync,
+          top: 0.16,
+          left: 45,
+          size: 33,
+          padding: 12,
+        ),
+        FloatingIconConfig(
+          icon: Icons.download,
+          top: 0.22,
+          right: 55,
+          size: 37,
+          padding: 14,
+        ),
+
+        FloatingIconConfig(
+          icon: Icons.playlist_play,
+          bottom: 0.22,
+          right: 45,
+          size: 30,
+          padding: 11,
+        ),
       ],
       backgroundColor: Color(0xFF0D1B2A), // Dark navy
       squareColor: Color(0xFF00FF41), // Matrix green
@@ -97,10 +143,10 @@ class _OnboardingPageState extends State<OnboardingPage>
       value: 1.0,
     );
 
-    // Gradient animation controller - continuously animates
-    _gradientController = AnimationController(
+    // Floating circle animation controller - slow continuous animation
+    _floatingCircleController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 8),
+      duration: Duration(seconds: 20),
     )..repeat();
   }
 
@@ -111,7 +157,7 @@ class _OnboardingPageState extends State<OnboardingPage>
     _scaleController.dispose();
     _slideController.dispose();
     _exitController.dispose();
-    _gradientController.dispose();
+    _floatingCircleController.dispose();
     super.dispose();
   }
 
@@ -173,66 +219,79 @@ class _OnboardingPageState extends State<OnboardingPage>
         },
         child: Stack(
           children: [
-            // Animated gradient background
+            // Solid color background
+            Positioned.fill(
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+                decoration: BoxDecoration(color: currentPage.backgroundColor),
+              ),
+            ),
+
+            // Floating circle object
             Positioned.fill(
               child: AnimatedBuilder(
-                animation: _gradientController,
+                animation: _floatingCircleController,
                 builder: (context, child) {
-                  return AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          currentPage.backgroundColor,
-                          Color.lerp(
-                            currentPage.backgroundColor,
-                            currentPage.squareColor,
-                            0.2 +
-                                0.1 *
-                                    (1 +
-                                        math.sin(
-                                          _gradientController.value *
-                                              2 *
-                                              math.pi,
-                                        )),
-                          )!,
-                          Color.lerp(
-                            currentPage.backgroundColor,
-                            currentPage.accentColor,
-                            0.15 +
-                                0.08 *
-                                    (1 +
-                                        math.cos(
-                                          _gradientController.value *
-                                                  2 *
-                                                  math.pi +
-                                              math.pi / 3,
-                                        )),
-                          )!,
-                          currentPage.backgroundColor,
-                        ],
-                        stops: [
-                          0.0,
-                          0.3 +
-                              0.1 *
-                                  math.sin(
-                                    _gradientController.value * 2 * math.pi,
-                                  ),
-                          0.7 +
-                              0.1 *
-                                  math.cos(
-                                    _gradientController.value * 2 * math.pi,
-                                  ),
-                          1.0,
-                        ],
-                        transform: GradientRotation(
-                          _gradientController.value * 2 * math.pi * 0.5,
+                  // Calculate circular floating motion
+                  final double angle =
+                      _floatingCircleController.value * 2 * math.pi;
+                  final double radiusX = 80; // Horizontal movement radius
+                  final double radiusY = 120; // Vertical movement radius
+
+                  // Calculate position offset from center
+                  final double offsetX = math.cos(angle) * radiusX;
+                  final double offsetY =
+                      math.sin(angle * 0.7) *
+                      radiusY; // Slightly different frequency for more organic movement
+
+                  return Stack(
+                    children: [
+                      // Large floating circle
+                      Positioned(
+                        left: MediaQuery.of(context).size.width * 0.6 + offsetX,
+                        top: MediaQuery.of(context).size.height * 0.3 + offsetY,
+                        child: Container(
+                          width: 200,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: RadialGradient(
+                              colors: [
+                                currentPage.squareColor.withValues(alpha: 0.15),
+                                currentPage.accentColor.withValues(alpha: 0.08),
+                                Colors.transparent,
+                              ],
+                              stops: [0.0, 0.6, 1.0],
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      // Secondary smaller circle with opposite movement
+                      Positioned(
+                        left:
+                            MediaQuery.of(context).size.width * 0.2 -
+                            offsetX * 0.6,
+                        top:
+                            MediaQuery.of(context).size.height * 0.5 -
+                            offsetY * 0.5,
+                        child: Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: RadialGradient(
+                              colors: [
+                                currentPage.accentColor.withValues(alpha: 0.12),
+                                currentPage.squareColor.withValues(alpha: 0.06),
+                                Colors.transparent,
+                              ],
+                              stops: [0.0, 0.5, 1.0],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),
@@ -314,110 +373,6 @@ class _OnboardingPageState extends State<OnboardingPage>
                                 ),
                               ],
                             ),
-                            child: Stack(
-                              children: [
-                                // Corner decorations
-                                Positioned(
-                                  top: 10,
-                                  left: 10,
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        left: BorderSide(
-                                          color: currentPage.squareColor,
-                                          width: 3,
-                                        ),
-                                        top: BorderSide(
-                                          color: currentPage.squareColor,
-                                          width: 3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 10,
-                                  right: 10,
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        right: BorderSide(
-                                          color: currentPage.squareColor,
-                                          width: 3,
-                                        ),
-                                        top: BorderSide(
-                                          color: currentPage.squareColor,
-                                          width: 3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 10,
-                                  left: 10,
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        left: BorderSide(
-                                          color: currentPage.squareColor,
-                                          width: 3,
-                                        ),
-                                        bottom: BorderSide(
-                                          color: currentPage.squareColor,
-                                          width: 3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 10,
-                                  right: 10,
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        right: BorderSide(
-                                          color: currentPage.squareColor,
-                                          width: 3,
-                                        ),
-                                        bottom: BorderSide(
-                                          color: currentPage.squareColor,
-                                          width: 3,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                // Accent dots
-                                Positioned(
-                                  top: 15,
-                                  left: 40,
-                                  child: Row(
-                                    children: List.generate(
-                                      3,
-                                      (index) => Container(
-                                        width: 6,
-                                        height: 6,
-                                        margin: EdgeInsets.only(right: 4),
-                                        decoration: BoxDecoration(
-                                          color: currentPage.accentColor,
-                                          shape: BoxShape.circle,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
                         ),
 
@@ -443,7 +398,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                                   }
 
                                   // Parallax sliding effect for center icon (reversed direction)
-                                  final offset = value * -500;
+                                  final offset = value * -200;
                                   final easedOffset =
                                       offset *
                                       (1.0 - (value.abs().clamp(0.0, 1.0)));
@@ -498,7 +453,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                           }
 
                           // Parallax sliding effect for description (reversed direction)
-                          final offset = value * -200;
+                          final offset = value * -1300;
                           final easedOffset =
                               offset * (1.0 - (value.abs().clamp(0.0, 1.0)));
 
@@ -531,7 +486,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                         }
 
                         // Parallax sliding effect for description (reversed direction)
-                        final offset = value * -200;
+                        final offset = value * -1300;
                         final easedOffset =
                             offset * (1.0 - (value.abs().clamp(0.0, 1.0)));
 
@@ -662,91 +617,58 @@ class _OnboardingPageState extends State<OnboardingPage>
             parallaxOffset * (1.0 - (value.abs().clamp(0.0, 1.0)));
 
         return Stack(
-          children: [
-            // Floating icon - top left
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.15,
-              left: 40 + easedOffset,
-              child: Opacity(
-                opacity: (1.0 - value.abs()).clamp(0.0, 1.0),
-                child: Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: content.squareColor.withValues(alpha: 0.6),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    content.floatingIcons[0],
-                    size: 32,
-                    color: iconColor.withValues(alpha: 0.8),
-                  ),
-                ),
-              ),
-            ),
+          children: content.floatingIcons.asMap().entries.map((entry) {
+            final index = entry.key;
+            final iconConfig = entry.value;
 
-            // Floating icon - top right
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.2,
-              right: 50 - easedOffset * 0.8,
-              child: Opacity(
-                opacity: (1.0 - value.abs()).clamp(0.0, 1.0),
-                child: Container(
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: content.squareColor.withValues(alpha: 0.6),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    content.floatingIcons[1],
-                    size: 40,
-                    color: iconColor.withValues(alpha: 0.8),
-                  ),
-                ),
-              ),
-            ),
+            // Calculate parallax multiplier based on index
+            final parallaxMultiplier = 1.0 - (index * 0.15);
+            final currentOffset = easedOffset * parallaxMultiplier;
 
-            // Floating icon - bottom left
-            Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.15,
-              left: 60 + easedOffset * 0.7,
+            return Positioned(
+              top: iconConfig.top != null
+                  ? MediaQuery.of(context).size.height * iconConfig.top!
+                  : null,
+              bottom: iconConfig.bottom != null
+                  ? MediaQuery.of(context).size.height * iconConfig.bottom!
+                  : null,
+              left: iconConfig.left != null
+                  ? iconConfig.left! + currentOffset
+                  : null,
+              right: iconConfig.right != null
+                  ? iconConfig.right! - currentOffset
+                  : null,
               child: Opacity(
                 opacity: (1.0 - value.abs()).clamp(0.0, 1.0),
                 child: Container(
-                  padding: EdgeInsets.all(14),
+                  padding: EdgeInsets.all(iconConfig.padding),
                   decoration: BoxDecoration(
-                    color: content.squareColor.withValues(alpha: 0.6),
-                    shape: BoxShape.circle,
+                    color: content.squareColor, // Full opacity solid background
+                    shape: iconConfig.text != null
+                        ? BoxShape.rectangle
+                        : BoxShape.circle,
+                    borderRadius: iconConfig.text != null
+                        ? BorderRadius.circular(15)
+                        : null,
                   ),
-                  child: Icon(
-                    content.floatingIcons[2],
-                    size: 36,
-                    color: iconColor.withValues(alpha: 0.8),
-                  ),
+                  child: iconConfig.icon != null
+                      ? Icon(
+                          iconConfig.icon,
+                          size: iconConfig.size,
+                          color: iconColor, // Full opacity icon
+                        )
+                      : Text(
+                          iconConfig.text!,
+                          style: GoogleFonts.orbitron(
+                            fontSize: iconConfig.size,
+                            fontWeight: FontWeight.bold,
+                            color: iconColor, // Full opacity text
+                          ),
+                        ),
                 ),
               ),
-            ),
-
-            // Floating icon - bottom right
-            Positioned(
-              bottom: MediaQuery.of(context).size.height * 0.2,
-              right: 40 - easedOffset * 0.9,
-              child: Opacity(
-                opacity: (1.0 - value.abs()).clamp(0.0, 1.0),
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: content.squareColor.withValues(alpha: 0.6),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    content.floatingIcons[3],
-                    size: 28,
-                    color: iconColor.withValues(alpha: 0.8),
-                  ),
-                ),
-              ),
-            ),
-          ],
+            );
+          }).toList(),
         );
       },
     );
@@ -776,11 +698,36 @@ class _OnboardingPageState extends State<OnboardingPage>
   }
 }
 
+class FloatingIconConfig {
+  final IconData? icon;
+  final String? text;
+  final double? top;
+  final double? bottom;
+  final double? left;
+  final double? right;
+  final double size;
+  final double padding;
+
+  FloatingIconConfig({
+    this.icon,
+    this.text,
+    this.top,
+    this.bottom,
+    this.left,
+    this.right,
+    required this.size,
+    required this.padding,
+  }) : assert(
+         icon != null || text != null,
+         'Either icon or text must be provided',
+       );
+}
+
 class OnboardingContent {
   final String title;
   final String description;
   final String centerIcon;
-  final List<IconData> floatingIcons;
+  final List<FloatingIconConfig> floatingIcons;
   final Color backgroundColor;
   final Color squareColor;
   final Color accentColor;
