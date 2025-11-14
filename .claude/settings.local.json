@@ -5,7 +5,11 @@
       "Bash(flutter devices:*)",
       "Bash(timeout /t 10)",
       "Bash(flutter analyze:*)",
-      "Bash(dart format:*)"
+      "Bash(dart format:*)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(if not exist \"d:\\multi_platform_media_player\\android\\app\\src\\main\\res\\values-v31\" mkdir \"d:\\multi_platform_media_player\\android\\app\\src\\main\\res\\values-v31\")",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []

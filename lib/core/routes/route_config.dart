@@ -6,11 +6,19 @@ class AppRoutes {
     );
   }
 
+  static const splash = '/';
   static const onboarding = '/onboarding';
   static const responsiveLandingPage = '/responsive_landing_page';
   static const responsiveItemPage = '/responsive_item_page';
 
   static final routes = <PageConfig>[
+    PageConfig(
+      path: splash,
+      showAppBar: false,
+      showNavBar: false,
+      showBackground: false,
+      scrollable: false,
+    ),
     PageConfig(
       path: onboarding,
       showAppBar: false,

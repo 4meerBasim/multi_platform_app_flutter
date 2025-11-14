@@ -28,8 +28,9 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/ 
+    - assets/
     - assets/first.png
+    - assets/splash/
     - Lottie/Welcome.json
 
   uses-material-design: true
